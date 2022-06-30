@@ -6,26 +6,81 @@
 //
 
 import UIKit
+import Firebase
 
 class WelcomeViewController: UIViewController {
+    
+    
 
     @IBOutlet weak var passwordTextfield: UITextField!
-    
     @IBOutlet weak var emailTextfield: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+       
+        
+        
+        
     }
 
     @IBAction func signInButtonClicked(_ sender: Any) {
         
-        performSegue(withIdentifier: "toFeedVC", sender: nil)
+        
+        if emailTextfield.text != "" && passwordTextfield.text != "" {
+            
+            Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { authdata, error in
+                
+                if error != nil {
+                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
+                }
+                else{
+                    
+                    self.performSegue(withIdentifier: "toFeedVC", sender: nil)
+                }
+            }
+            
+        }
+        else{
+            
+        }
+        
         
     }
     @IBAction func signUpButtonClicked(_ sender: Any) {
         
+        if emailTextfield.text != "" && passwordTextfield.text != ""{
+            Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { authdata, error in
+                
+                if error != nil {
+                    
+                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
+                }
+                else{
+                    self.performSegue(withIdentifier: "toFeedVC", sender: nil)
+                }
+            }
+        }
+        else{
+            self.makeAlert(title: "Warning", message: "Username/Password")
+            
+            
+        }
         
     }
     
 }
 
+
+extension WelcomeViewController{
+    
+    func makeAlert(title:String, message:String){
+        let alert = UIAlertController(title: "Error", message: "Username/Password", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true
+                , completion: nil)
+    }
+}
