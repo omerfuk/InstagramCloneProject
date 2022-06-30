@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UploadViewController: UIViewController {
 
@@ -40,7 +41,37 @@ class UploadViewController: UIViewController {
     
     @IBAction func uploadButtonClicked(_ sender: Any) {
         
+        let storage = Storage.storage()
+        let storageReferance = storage.reference()
         
+        let mediaFolder = storageReferance.child("media")
+        
+        //if you want to save your image to storage, you should convert it do data
+        
+        if let data = imageView.image?.jpegData(compressionQuality: 0.5) {
+            
+            let imageReferance = mediaFolder.child("image.jpg")
+            
+            imageReferance.putData(data, metadata: nil) { metadata, error in
+                
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                else{
+                    
+                    imageReferance.downloadURL { url, error in
+                        
+                        if error == nil {
+                            
+                            let imageUrl  = url?.absoluteString
+                            print(imageUrl)
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
     
 
