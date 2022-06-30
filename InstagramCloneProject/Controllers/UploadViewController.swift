@@ -50,12 +50,14 @@ class UploadViewController: UIViewController {
         
         if let data = imageView.image?.jpegData(compressionQuality: 0.5) {
             
-            let imageReferance = mediaFolder.child("image.jpg")
+            let uuid = UUID().uuidString
+            
+            let imageReferance = mediaFolder.child("\(uuid).jpg")
             
             imageReferance.putData(data, metadata: nil) { metadata, error in
                 
                 if error != nil {
-                    print(error?.localizedDescription)
+                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Errorrr")
                 }
                 else{
                     
@@ -65,6 +67,10 @@ class UploadViewController: UIViewController {
                             
                             let imageUrl  = url?.absoluteString
                             print(imageUrl)
+                            self.makeAlert(title: "Success", message: "Success")
+                            
+                            
+                            //Database
                             
                         }
                     }

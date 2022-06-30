@@ -73,14 +73,5 @@ class WelcomeViewController: UIViewController {
 }
 
 
-extension WelcomeViewController{
-    
-    func makeAlert(title:String, message:String){
-        let alert = UIAlertController(title: "Error", message: "Username/Password", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        
-        present(alert, animated: true
-                , completion: nil)
-    }
-}
+
+
