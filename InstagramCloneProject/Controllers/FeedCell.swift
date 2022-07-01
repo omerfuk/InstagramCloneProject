@@ -9,6 +9,7 @@ import UIKit
 
 class FeedCell: UITableViewCell {
 
+    @IBOutlet weak var documentIDLabel: UILabel! //Hidden
     
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -27,5 +28,6 @@ class FeedCell: UITableViewCell {
     }
 
     @IBAction func likeButtonClicked(_ sender: Any) {
+        
     }
 }

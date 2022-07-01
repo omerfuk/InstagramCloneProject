@@ -18,6 +18,7 @@ class FeedViewController: UIViewController {
     var userCommentArray = [String]()
     var likeArray = [Int]()
     var userImageArray = [String]()
+    var documentIDArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,8 @@ class FeedViewController: UIViewController {
         fireStoreDatabase.settings = settings
         */
         
-        fireStoreDatabase.collection("Posts").addSnapshotListener { snapshot, error in
+        //.ORDER means to order by date, descending means it will be new to old
+        fireStoreDatabase.collection("Posts").order(by: "date", descending: true).addSnapshotListener { snapshot, error in
             
             if error != nil {
                 print(error?.localizedDescription)
@@ -50,10 +52,12 @@ class FeedViewController: UIViewController {
                     self.userEmailArray.removeAll(keepingCapacity: false)
                     self.likeArray.removeAll(keepingCapacity: false)
                     self.userCommentArray.removeAll(keepingCapacity: false)
+                    self.documentIDArray.removeAll(keepingCapacity: false)
                     
                     
                     for document in snapshot!.documents {
                         let documentID = document.documentID
+                        self.documentIDArray.append(documentID)
                         print(documentID)
                         
                         if let postedBy = document.get("postedBy") as? String{
@@ -96,6 +100,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.commentLabel.text = userCommentArray[indexPath.row]
         //SD WEB IMAGE library used, shortener image url conversion process. Liked it!
         cell.userImageView.sd_setImage(with: URL(string: self.userImageArray[indexPath.row]))
+        cell.documentIDLabel.text = documentIDArray[indexPath.row]
         
         return cell
     }

@@ -247,6 +247,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bq-oY-Rlz">
+                                                    <rect key="frame" x="352" y="11" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="RUg-kU-pFl"/>
+                                                        <constraint firstAttribute="width" constant="42" id="nhL-WZ-FIO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="uXY-xL-W1Q" firstAttribute="leading" secondItem="Idb-Lu-IB9" secondAttribute="leadingMargin" constant="9" id="43S-PP-Bvi"/>
@@ -257,15 +267,18 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="mQF-7Z-YgI" secondAttribute="trailing" constant="8" id="Gfx-cF-r0l"/>
                                                 <constraint firstItem="9sw-aO-5yT" firstAttribute="leading" secondItem="Idb-Lu-IB9" secondAttribute="leading" constant="37" id="MlL-03-BEm"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="uXY-xL-W1Q" secondAttribute="trailing" constant="8" id="QVO-Ch-0Fc"/>
+                                                <constraint firstItem="5bq-oY-Rlz" firstAttribute="trailing" secondItem="Idb-Lu-IB9" secondAttribute="trailingMargin" id="Viw-1u-VqW"/>
                                                 <constraint firstItem="9sw-aO-5yT" firstAttribute="top" secondItem="mQF-7Z-YgI" secondAttribute="bottom" constant="1" id="XUv-3k-maR"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="8nO-lo-e9m" secondAttribute="trailing" constant="8" id="Y2s-gw-bos"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QNl-pj-CK9" secondAttribute="trailing" constant="8" id="byJ-mG-jDl"/>
                                                 <constraint firstItem="uXY-xL-W1Q" firstAttribute="top" secondItem="8nO-lo-e9m" secondAttribute="bottom" constant="1" id="d3k-ea-phR"/>
+                                                <constraint firstItem="5bq-oY-Rlz" firstAttribute="top" secondItem="Idb-Lu-IB9" secondAttribute="topMargin" id="meG-M9-rWh"/>
                                                 <constraint firstItem="QNl-pj-CK9" firstAttribute="top" secondItem="mQF-7Z-YgI" secondAttribute="bottom" constant="1" id="rqh-3C-Whm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentLabel" destination="mQF-7Z-YgI" id="7Ca-Ps-zsH"/>
+                                            <outlet property="documentIDLabel" destination="5bq-oY-Rlz" id="DEO-bz-V53"/>
                                             <outlet property="likeButton" destination="9sw-aO-5yT" id="uKX-4g-uMJ"/>
                                             <outlet property="likeLabel" destination="QNl-pj-CK9" id="4Wc-q8-VvZ"/>
                                             <outlet property="userEmailLabel" destination="8nO-lo-e9m" id="nFw-wn-yBb"/>
