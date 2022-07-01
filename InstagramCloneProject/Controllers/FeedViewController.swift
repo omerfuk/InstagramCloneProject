@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import SDWebImage
 
 class FeedViewController: UIViewController {
     
@@ -44,6 +45,13 @@ class FeedViewController: UIViewController {
             else{
                 //No error
                 if snapshot?.isEmpty != true && snapshot != nil {
+                    
+                    self.userImageArray.removeAll(keepingCapacity: false)
+                    self.userEmailArray.removeAll(keepingCapacity: false)
+                    self.likeArray.removeAll(keepingCapacity: false)
+                    self.userCommentArray.removeAll(keepingCapacity: false)
+                    
+                    
                     for document in snapshot!.documents {
                         let documentID = document.documentID
                         print(documentID)
@@ -86,7 +94,8 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.userEmailLabel.text = userEmailArray[indexPath.row]
         cell.likeLabel.text = String(likeArray[indexPath.row])
         cell.commentLabel.text = userCommentArray[indexPath.row]
-        cell.userImageView.image = UIImage(named: "clickMe")
+        //SD WEB IMAGE library used, shortener image url conversion process. Liked it!
+        cell.userImageView.sd_setImage(with: URL(string: self.userImageArray[indexPath.row]))
         
         return cell
     }
