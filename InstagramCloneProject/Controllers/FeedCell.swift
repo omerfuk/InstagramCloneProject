@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedCell: UITableViewCell {
 
@@ -16,6 +17,9 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var userEmailLabel: UILabel!
+    
+    var isLiked:Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,5 +33,28 @@ class FeedCell: UITableViewCell {
 
     @IBAction func likeButtonClicked(_ sender: Any) {
         
+        let fireStoreDatabese = Firestore.firestore()
+        
+        if let likeCount = Int(likeLabel.text!) {
+            
+            if isLiked == true{
+                let likeStore = ["likes": likeCount - 1] as [String: Any]
+                
+                fireStoreDatabese.collection("Posts").document(documentIDLabel.text!).setData(likeStore, merge: true) // merge means just change the given direction
+                
+                isLiked = false
+                
+            }
+            else{
+                let likeStore = ["likes": likeCount + 1] as [String: Any]
+                
+                fireStoreDatabese.collection("Posts").document(documentIDLabel.text!).setData(likeStore, merge: true) // merge means just change the given direction
+                isLiked = true
+            }
+            
+            
+            
+
+        }
     }
 }
